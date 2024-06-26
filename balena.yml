@@ -1,0 +1,13 @@
+name: "hostsetter"
+type: "sw.block"
+description: "Helper service to set the host name on a balena device"
+assets:
+  repository:
+    type: "blob.asset"
+    data:
+      url: "https://github.com/arribada/hostsetter-block-balena"
+data:
+  defaultDeviceType: raspberrypi5
+  supportedDeviceTypes:
+    - raspberrypi5
+

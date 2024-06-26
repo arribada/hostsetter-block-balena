@@ -1,0 +1,19 @@
+FROM balenalib/%%BALENA_ARCH%%-debian-golang:1.20-bullseye-build AS builder
+
+RUN install_packages git
+
+WORKDIR /src/github.com/arribada/i360/hostsetter
+COPY ./ .
+RUN make build
+
+################################################
+# The run time container that will go to devices
+FROM balenalib/%%BALENA_ARCH%%-debian:bullseye-run AS runner
+
+WORKDIR /
+
+# copy our binaries
+COPY --from=builder /src/github.com/arribada/i360/hostsetter/bin/hostsetter .
+
+ENTRYPOINT ["./hostsetter"]
+CMD ["-v=true", "-hostname=SETME"]

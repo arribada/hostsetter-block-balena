@@ -1,0 +1,11 @@
+version: "2.1"
+services:
+  hostsetter:
+    build: ./hostsetter
+    labels:
+      io.balena.features.supervisor-api: '1'
+    environment:
+        - HST_HOSTNAME=SETME
+        - UDEV=1
+    privileged: true
+    restart: no

@@ -15,5 +15,6 @@ WORKDIR /
 # copy our binaries
 COPY --from=builder /src/github.com/arribada/i360/hostsetter/bin/hostsetter .
 
+# fake change so we can retry pushing
 ENTRYPOINT ["./hostsetter"]
 CMD ["-v=true", "-hostname=SETME"]

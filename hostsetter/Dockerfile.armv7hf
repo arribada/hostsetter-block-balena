@@ -1,0 +1,19 @@
+FROM balenalib/armv7hf-alpine-golang:3.18-build as builder
+
+RUN install_packages git
+
+WORKDIR /src/github.com/arribada/i360/hostsetter
+COPY ./ .
+RUN make build
+
+################################################
+# The run time container that will go to devices
+FROM balenalib/armv7hf-alpine:3.18-run as runner
+
+WORKDIR /
+
+# copy our binaries
+COPY --from=builder /src/github.com/arribada/i360/hostsetter/bin/hostsetter .
+
+ENTRYPOINT ["./hostsetter"]
+CMD ["-v=true", "-hostname=SETME"]

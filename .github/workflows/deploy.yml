@@ -9,7 +9,6 @@ jobs:
     balena_cloud_build:
         runs-on: ubuntu-latest
         strategy:
-            fail-fast: true
             matrix:
               arch: [aarch64, amd64, armv7hf]
     

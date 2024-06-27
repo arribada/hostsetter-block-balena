@@ -14,7 +14,6 @@ jobs:
   balena_cloud_build:
     runs-on: ubuntu-latest
     strategy:
-        fail-fast: true
         matrix:
           arch: [aarch64, amd64, armv7hf]
 
@@ -25,8 +24,5 @@ jobs:
         with:
           balena_token: ${{ secrets.BALENA_TOKEN }}
           fleet: arribada/hostsetter-${{ matrix.arch }}
-          create_tag: true
       - name: Log release ID built
         run: echo "Built release ID ${{ steps.build.outputs.release_id }}"
-
-

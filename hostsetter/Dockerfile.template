@@ -1,4 +1,4 @@
-FROM balenalib/%%BALENA_ARCH%%-debian-golang:1.20-bullseye-build AS builder
+FROM balenalib/%%BALENA_ARCH%%-alpine-golang:3.18-build as builder
 
 RUN install_packages git
 
@@ -8,7 +8,7 @@ RUN make build
 
 ################################################
 # The run time container that will go to devices
-FROM balenalib/%%BALENA_ARCH%%-debian:bullseye-run AS runner
+FROM balenalib/%%BALENA_ARCH%%-alpine:3.18-run as runner
 
 WORKDIR /
 
